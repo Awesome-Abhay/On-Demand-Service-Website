@@ -1,0 +1,21 @@
+.flex{
+    display: flex;
+}
+.justify-center{
+    justify-content: center;
+}
+.align-center{
+    align-items: center;
+}
+.flex-col{
+    flex-direction: column;
+}
+
+.green{
+    color: #1DBF73;
+}
+.rupee{
+    font-weight: 700;
+    font-size: 28px;
+    color: #f86048;
+}
