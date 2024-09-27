@@ -727,6 +727,7 @@ footer{
     width: 98.9vw;
     height: 466px;
     display: grid;
+    /* justify-content: center; */
     grid-template-columns: repeat(4, 1fr);
     padding: 100px 0px;
 }
@@ -843,4 +844,7 @@ footer > div:nth-child(4) .content .email .in input{
 }
 footer > div:nth-child(4) .content .email .in input:focus{
     outline: none;
+}
+footer > div:last-child{
+    justify-self: end;
 }
