@@ -1,0 +1,109 @@
+.aboutOuter{
+    height: 170px;
+    width: 98.8vw;
+    background-color: #f1f6ff;
+}
+.aboutInner{
+    margin-left: 150px;
+}
+.aboutInner div:nth-child(1){
+    font-weight: 400;
+    font-size: 16px;
+    color: black;
+
+}
+.aboutInner div:nth-child(2){
+    font-weight: 700;
+    font-size: 40px;
+    color: black;
+
+}
+.aboutSpecial{
+    height: 630px;
+    width: 98.8vw;
+}
+.aboutSpecial .bgpic{
+    height: 208px;
+    width: 208px;
+    position: relative;
+    top: 50px;
+    left: 30px;
+}
+.aboutSpecial .content{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    height: 433px;
+    width: 80%;
+    margin: auto;
+    bottom: 90px;
+}
+.aboutSpecial .content div:first-child{
+    height: 433px;
+    width: 45%;
+    color: black;
+}
+
+.aboutSpecial .content div:last-child{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 50%;
+}
+.aboutSpecial .content div:last-child .heading{
+    font-weight: 700;
+    font-size: 45px;
+    width: 100%;
+    /* border: 2px solid black; */
+    height: 80px;
+}
+.aboutSpecial .content div:last-child .para{
+    font-weight: 400;
+    color: #666666;
+    /* border: 2px solid black; */
+}
+.aboutSpecial .content div:last-child .list{
+    width: 100%;
+}
+.aboutSpecial .content div:last-child .list li{
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: black;
+
+}
+.aboutSpecial .upperPic{
+    height: 160px;
+    width: 179px;
+    background-color: #ff6b2c;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid white;
+    border-radius: 10px;
+    position: relative;
+    bottom: 210px;
+    left: 425px;
+}
+.aboutSpecial .upperPic div:first-child{
+    font-weight: 700;
+    font-size: 34px;
+}
+.aboutSpecial .upperPic div:last-child{
+    font-weight: 500;
+    font-size: 24px;
+}
+
+.categories{
+    display: flex;
+    flex-direction:column;
+    gap: 20px;
+    background-color: transparent;
+    height: 500px;
+}
+
+.futter{
+    width: 98.8vw;
+    background-color: #f1f6ff;
+}
