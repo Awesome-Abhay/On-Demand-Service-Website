@@ -1,0 +1,129 @@
+.aboutOuter{
+    height: 170px;
+    width: 98.8vw;
+    background-color: #f1f6ff;
+}
+.aboutInner{
+    margin-left: 150px;
+}
+.aboutInner div:nth-child(1){
+    font-weight: 400;
+    font-size: 16px;
+    color: black;
+
+}
+.aboutInner div:nth-child(2){
+    font-weight: 700;
+    font-size: 40px;
+    color: black;
+
+}
+
+.mainItems{
+    width: 80vw;
+    margin: 80px auto;
+    display: flex;
+    justify-content: space-between;
+}
+.mainItems .card{
+    width: 350px;
+    height: 259px;
+    background-color: #fff0e9;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+}
+.mainItems .card div:first-child{
+    height: 80px;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+.mainItems .card div:first-child img{
+    height: 40px;
+    width: 40px;
+}
+.mainItems .card div:nth-child(2){
+    font-weight: 700;
+    font-size: 24px;
+    color: black;
+    margin-bottom: 10px;
+}
+.mainItems .card .num{
+    color: #666666;
+}
+
+.touch{
+    width: 80vw;
+    margin: 80px auto;
+}
+.touch form{
+    margin: 50px 0px;
+}
+.touch > div:first-child{
+    color: black;
+    font-weight: 600;
+    font-size: 32px;
+}
+.touch form > div:first-child{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    row-gap: 20px;
+}
+.touch form label{
+    font-weight: 600;
+    color: black;
+}
+.touch form input{
+    border: 1px solid #66666659;
+    color: #666666;
+    padding-left: 20px;
+    height: 60px;
+}
+.touch form > div:first-child .card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 540px;
+    height: 100px;
+    border: none;
+}
+.touch form > div:nth-child(2){
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0px;
+}
+.touch form > div:nth-child(2) textarea{
+    padding: 20px;
+    color: #666666;
+    border: 1px solid #66666659;
+}
+.touch form > div:last-child{
+    height: 61.2px;
+    width: 192px;
+    background-color: #1dbf73;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+.touch form > div:last-child button{
+    background-color: transparent;
+    border: none;
+    font-weight: 600;
+    font-size: 18px;
+    width: 100%;
+    height: 100%;
+}
+
+.futter{
+    width: 98.8vw;
+    background-color: #f1f6ff;
+}

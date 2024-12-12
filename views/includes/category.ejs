@@ -1,0 +1,167 @@
+<div class="carousel container">
+    <div class="wrapper">
+        <div class="card">
+            <div>
+                <img src="/images/mop.png">
+            </div>
+            <div>Cleaning</div>
+            <div>36+ Service</div>
+        </div>
+        <div class="card" style="background-color: #be3eff;">
+            <div>
+                <img src="/images/electrician.png">
+            </div>
+            <div>Electric</div>
+            <div>36+ Service</div>
+        </div>
+        <div class="card" style="background-color: #f86048;">
+            <div>
+                <img src="/images/truck.png">
+            </div>
+            <div>Home Move</div>
+            <div>36+ Service</div>
+        </div>
+        <div class="card" style="background-color: #c71f66;">
+            <div>
+                <img src="/images/saloon.png">
+            </div>
+            <div>Saloon & Spa</div>
+            <div>36+ Service</div>
+        </div>
+        <div class="card" style="background-color: #378fff;">
+            <div>
+                <img src="/images/roller.png">
+            </div>
+            <div>Painting</div>
+            <div>36+ Service</div>
+        </div>
+
+
+
+        <div class="card">
+            <div>
+                <img src="/images/mop.png">
+            </div>
+            <div>Cleaning</div>
+            <div>36+ Service</div>
+        </div>
+        <div class="card" style="background-color: #be3eff;">
+            <div>
+                <img src="/images/electrician.png">
+            </div>
+            <div>Electric</div>
+            <div>36+ Service</div>
+        </div>
+        <div class="card" style="background-color: #f86048;">
+            <div>
+                <img src="/images/truck.png">
+            </div>
+            <div>Home Move</div>
+            <div>36+ Service</div>
+        </div>
+        <div class="card" style="background-color: #c71f66;">
+            <div>
+                <img src="/images/saloon.png">
+            </div>
+            <div>Saloon & Spa</div>
+            <div>36+ Service</div>
+        </div>
+        <div class="card" style="background-color: #378fff;">
+            <div>
+                <img src="/images/roller.png">
+            </div>
+            <div>Painting</div>
+            <div>36+ Service</div>
+        </div>
+
+
+
+    </div>
+</div>
+<div class="circles container">
+    <button id="first"></button>
+    <button id="second"></button>
+    <button id="third"></button>
+    <button id="fourth"></button>
+    <button id="fifth"></button>
+    <button id="sixth"></button>
+</div>
+
+<script>
+    let first = document.querySelector("#first");
+    let second = document.querySelector("#second");
+    let third = document.querySelector("#third");
+    let fourth = document.querySelector("#fourth");
+    let fifth = document.querySelector("#fifth");
+    let sixth = document.querySelector("#sixth");
+
+    let items = document.querySelectorAll(".carousel .wrapper .card");
+
+    let buttons = document.querySelectorAll(".circles button");
+
+    let currentIndex = 0;
+
+    function updateColor() {
+        buttons.forEach((button, index) => {
+            // button.style.backgroundColor = index === currentImageIndex ? "lightGreen" : "black";
+            if (index == currentIndex - 4) {
+                button.style.backgroundColor = "lightGreen";
+            } else {
+                button.style.backgroundColor = "#dddddd";
+            }
+        });
+    }
+
+
+    function scroll() {
+        items.forEach((item, index) => {
+            if (index === currentIndex) {
+                item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        })
+
+
+        updateColor();
+
+    }
+
+    updateColor();
+    
+    function updateFirst() {
+        buttons.forEach((button, index) => {
+            if (index == 0) {
+                button.style.backgroundColor = "lightGreen";
+            } else {
+                button.style.backgroundColor = "#dddddd";
+            }
+        })
+    }
+    updateFirst();
+
+    first.addEventListener('click', () => {
+        currentIndex = 0;
+        scroll();
+        updateFirst();
+    })
+    second.addEventListener('click', () => {
+        console.log("Yes");
+        currentIndex = 5;
+        scroll();
+    })
+    third.addEventListener('click', () => {
+        currentIndex = 6;
+        scroll();
+    })
+    fourth.addEventListener('click', () => {
+        currentIndex = 7;
+        scroll();
+    })
+    fifth.addEventListener('click', () => {
+        currentIndex = 8;
+        scroll();
+    })
+    sixth.addEventListener('click', () => {
+        currentIndex = 9;
+        scroll();
+    })
+</script>

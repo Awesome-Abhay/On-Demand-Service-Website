@@ -1,0 +1,95 @@
+.aboutOuter {
+    height: 170px;
+    width: 98.8vw;
+    background-color: #f1f6ff;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.aboutInner {
+    margin-left: 150px;
+}
+
+.aboutInner div:first-child {
+    font-weight: 700;
+    font-size: 40px;
+    color: black;
+}
+
+.aboutInner div:nth-child(2) {
+    font-weight: 400;
+    font-size: 16px;
+    color: black;
+}
+
+.touch {
+    width: 98.8vw;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    width: 600px; /* Limit the width of the form */
+    background-color: #f9f9f9; /* Light background for the form */
+    padding: 20px; /* Padding around the form */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+fieldset {
+    border: none; /* Remove the default fieldset border */
+}
+
+legend {
+    font-size: 24px; /* Larger font for the legend */
+    font-weight: bold; /* Bold font for emphasis */
+    margin-bottom: 20px; /* Space below the legend */
+    color: black;
+}
+
+.form-group {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+    margin-bottom: 20px; /* Space between form groups */
+}
+
+label {
+    flex: 1; /* Allow label to take up 1 part of the flex space */
+    font-weight: bold; /* Bold font for labels */
+    margin-right: 20px; /* Space between label and input */
+}
+
+input, textarea {
+    flex: 2; /* Allow input fields to take up 2 parts of the flex space */
+    padding: 10px; /* Padding inside input fields */
+    border: 1px solid #ccc; /* Border around input fields */
+    border-radius: 5px; /* Rounded corners for input fields */
+    transition: border-color 0.3s; /* Smooth transition for border color */
+}
+
+input:focus, textarea:focus {
+    border-color: #1DBF73; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+textarea {
+    resize: none; /* Prevent resizing of textarea */
+    height: 100px; /* Fixed height for textarea */
+}
+
+.submit-button {
+    background-color: #1DBF73; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners for button */
+    padding: 10px 20px; /* Padding inside button */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-weight: bold; /* Bold font for button */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+.submit-button:hover {
+    background-color: #1a9b5e; /* Darker green on hover */
+}

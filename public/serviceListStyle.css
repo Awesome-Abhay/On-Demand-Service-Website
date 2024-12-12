@@ -1,0 +1,88 @@
+.aboutOuter{
+    height: 170px;
+    width: 98.8vw;
+    background-color: #f1f6ff;
+}
+.aboutInner{
+    margin-left: 150px;
+}
+.aboutInner div:nth-child(1){
+    font-weight: 400;
+    font-size: 16px;
+    color: black;
+
+}
+.aboutInner div:nth-child(2){
+    font-weight: 700;
+    font-size: 40px;
+    color: black;
+
+}
+
+.choosing{
+    height: 170px;
+    width: 80vw;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.choosing div{
+    width: 255px;
+    height: 48px;
+}
+.choosing select{
+    color: #5b5757;
+    height: 100%;
+    width: 100%;
+    border-color: #dddddd;
+    padding: 0px 10px;
+}
+.choosing div:last-child{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.choosing div:last-child select{
+    width: 75%;
+}
+.choosing option{
+    color: black;
+}
+
+.resultCount{
+    height: 58px;
+    width: 98.8vw;  
+    display: flex;
+    justify-content: center;
+}
+.resultCount .wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 2px solid black; */
+    height: 100%;
+    width: 80%;
+}
+.resultCount .wrapper div:first-child{
+    color: black;
+    font-weight: 600;
+    font-size: 32px;
+}
+.resultCount .wrapper div:last-child{
+    font-weight: 400;
+    font-size: 18px;
+    color: #5b5757;
+}
+
+.featured .carousel .wrapper{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    row-gap: 30px;
+}
+
+.futter{
+    width: 98.8vw;
+    background-color: #f1f6ff;
+}
