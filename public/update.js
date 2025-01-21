@@ -41,12 +41,11 @@ window.onclick = function(event) {
 
 
 
-function updateUserProfile(user){
+async function updateUserProfile(user){
 
     // const userName= user.displayName;
     // const userEmail= user.email;
-    const userProfilePicture= user.photoURL;    
-    
+    const userProfilePicture= await user.photoURL;        
     document.querySelector("nav .profile img").src= userProfilePicture;
 }
 
