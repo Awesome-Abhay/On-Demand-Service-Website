@@ -30,6 +30,9 @@ app.listen(port, () => {
     console.log(`Server is listening on port: ${port}`);
 });
 
+app.get('/', (req, res)=>{
+    res.redirect("/qixer");
+})
 app.get('/qixer', (req, res) => {
     res.render("auth");
 });
