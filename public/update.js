@@ -25,7 +25,7 @@ document.getElementById("closeDialog").addEventListener('click', () => {
 
 document.getElementById("logoutButton").addEventListener('click', () => {
     auth.signOut().then(() => {
-        window.location.href = "http://localhost:3000/qixer"; // Redirect to login page
+        window.location.href = "/qixer"; // Redirect to login page
     }).catch((error) => {
         console.error("Logout error:", error);
     });
