@@ -52,15 +52,39 @@ app.get('/qixer/home', (req, res) => {
 app.get('/qixer/about', (req, res) => {
     res.render("about");
 });
+
 app.get(`/qixer/services`, async(req, res) => {
     await getServiceProvider();
-
-    console.log("this is request:" ,req.query.page);
-          
+    
+    // Pagination logic
     const page = parseInt(req.query.page) || 1;
-    // const page=2;
-    res.render('services', { serviceProviders: allServiceProviders, page });
+    const limit = 12;
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+    
+    // Get paginated results
+    const paginatedServices = allServiceProviders.slice(startIndex, endIndex);
+    const totalServices = allServiceProviders.length;
+    const totalPages = Math.ceil(totalServices / limit);
+
+    res.render('services', { 
+        serviceProviders: paginatedServices,
+        currentPage: page,
+        totalPages: totalPages,
+        totalServices: totalServices
+    });
 });
+
+
+// app.get(`/qixer/services`, async(req, res) => {
+//     await getServiceProvider();
+
+//     console.log("this is request:" ,req.query.page);
+          
+//     const page = parseInt(req.query.page) || 1;
+//     // const page=2;
+//     res.render('services', { serviceProviders: allServiceProviders, page });
+// });
 app.get('/qixer/all_categories', (req, res) => {
     res.render("categories");
 });

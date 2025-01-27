@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="/serviceListStyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <script src="/update.js" defer type="module"></script>
+    <style>
+        .active{
+            background-color: lightgreen;
+        }
+    </style>
 </head>
 
 <body>
@@ -69,55 +74,78 @@
 
             <div class="resultCount">
                 <div class="wrapper">
-                    <div>1,283 Search Result "Cleaning Service"</div>
-                    <div>Showing 12 of 48</div>
+                    <div>
+                        <%= totalServices %> Search Results
+                    </div>
+                    <div>Showing <%= serviceProviders.length %> of <%= totalServices %>
+                    </div>
                 </div>
             </div>
 
             <section class="featured">
                 <div class="carousel">
                     <div class="wrapper">
-                        <% console.log(page);
-                         %>
-                        <h1 style="color: black;"><%= page %></h1>
-
-                        <% if (page==1) { %>
-                         <%- include('includes/servicePage1') %>
-                        <% } else { %>
-                            <%- include(`includes/servicePage2`) %>
-                        <% } %>
-
-                                
+                        <% for(let seller of serviceProviders) { %>
+                            <div class="card">
+                                <div class="image">
+                                    <img src="<%= seller.photo %>" alt="">
+                                </div>
+                                <div class="profile">
+                                    <div style="color: #666666;">
+                                        <%= seller.name %>
+                                    </div>
+                                    <div style="color: #666666;">
+                                        <img src="/svgs/star.svg"> 4.9(231)
+                                    </div>
+                                </div>
+                                <div class="heading">
+                                    <%= seller.serviceName %>
+                                </div>
+                                <div class="para" style="color: #666666;">
+                                    It is a long established fact that a reader will be distracted by the readable
+                                </div>
+                                <div class="rate flex">
+                                    <div style="color:#666666;">Starting at</div>
+                                    <div class="rupee">Rs. <%= seller.price %>
+                                    </div>
+                                </div>
+                                <button class="green">Book Appointment</button>
+                            </div>
+                            <% } %>
                     </div>
                 </div>
+
+                <!-- Add pagination controls -->
                 <div class="circles container">
-                    <button id="1"></button>
-                    <button id="2"></button>
+                    <% for(let i=1; i <=totalPages; i++) { %>
+                        <button class="<%= currentPage === i ? 'active' : '' %>"
+                            onclick="window.location.href='/qixer/services?page=<%= i %>'">
+                        </button>
+                    <% } %>
                 </div>
             </section>
+
+
 
             <section class="futter">
                 <%- include("includes/footer.ejs") %>
             </section>
 
-
             <script>
-                const buttons = document.querySelectorAll("button");
+                // Update active button state
+
+                let buttons= document.querySelectorAll('circles button');
+
                 buttons.forEach(button => {
-                    button.addEventListener('click', async (event) => {
-                        const id = event.target.id;
-
-                        const response = await fetch(`/qixer/services?page=${id}`, {
-                            method: 'GET',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            }
-                        });
-                        
-
+                    button.addEventListener('click', function () {
+                        buttons.forEach(btn =>
+                            btn.classList.remove('active'));
+                        this.classList.add('active');
                     });
                 });
+
             </script>
+
 
 </body>
 
