@@ -62,3 +62,14 @@ use('Cluster0');
 //     price: 100,
 //     photo: "https://images.unsplash.com/photo-1592009309602-1dde752490ae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
 // });
+
+db.getCollection('Service_Providers').updateOne(
+    { name: "saloonSpa" },  // match category document
+    { 
+        $pull: { 
+            nestedItems: { 
+                name: "Dhruv Agrawal" 
+            } 
+        } 
+    }
+);

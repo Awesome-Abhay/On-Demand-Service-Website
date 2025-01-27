@@ -74,9 +74,29 @@ input:focus, textarea:focus {
     outline: none; /* Remove default outline */
 }
 
-textarea {
-    resize: none; /* Prevent resizing of textarea */
-    height: 100px; /* Fixed height for textarea */
+select {
+    flex: 2;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+    background-color: white;
+    cursor: pointer;
+    color: #333;
+}
+
+select:focus {
+    outline: none;
+}
+
+select option {
+    padding: 10px;
+    background-color: white;
+    color: #333;
+}
+
+select:required:invalid {
+    color: #666;
 }
 
 .submit-button {

@@ -2,9 +2,13 @@ const mongoose= require("mongoose");
 
 const sellersSchema = new mongoose.Schema({
     name: String,
-    serviceName:String,
-    price:Number,
-    photo: String
+    nestedItems:[{
+        name: String,
+        serviceName: String, 
+        price: String,
+        photo: String
+        }
+    ]
 },{ collection: 'Service_Providers' });
 
 const serviceProviders = mongoose.model('serviceProviders', sellersSchema);

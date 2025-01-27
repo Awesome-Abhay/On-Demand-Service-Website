@@ -17,9 +17,15 @@ async function main() {
 }
 
 let allPopularServices;
-let allServiceProviders;
+let allServiceProviders=[];
 async function getServiceProvider() {
-    allServiceProviders = await serviceProviders.find({});
+    let temp = await serviceProviders.find({});
+    temp.forEach((doc) => {
+        doc.nestedItems.forEach((item) => { 
+            allServiceProviders.push(item);
+            
+         });
+    });
 }
 getServiceProvider();
 
@@ -46,7 +52,6 @@ app.get('/qixer', (req, res) => {
 });
 app.get('/qixer/home', (req, res) => {
     getPopularServices();
-    // getServiceProvider();
     res.render("index", { serviceProviders: allPopularServices });
 });
 app.get('/qixer/about', (req, res) => {
@@ -54,7 +59,6 @@ app.get('/qixer/about', (req, res) => {
 });
 
 app.get(`/qixer/services`, async(req, res) => {
-    await getServiceProvider();
     
     // Pagination logic
     const page = parseInt(req.query.page) || 1;
@@ -85,6 +89,7 @@ app.get(`/qixer/services`, async(req, res) => {
 //     // const page=2;
 //     res.render('services', { serviceProviders: allServiceProviders, page });
 // });
+
 app.get('/qixer/all_categories', (req, res) => {
     res.render("categories");
 });
@@ -99,12 +104,22 @@ app.get('/qixer/seller', (req, res) => {
 });
 
 app.post('/qixer/seller', async (req, res) => {
-    let { name, serviceName, price, photo } = req.body;
-    let seller = new serviceProviders({ name, serviceName, price, photo });
-    await seller.save();
+    let { name, serviceName, price, photo, category } = req.body;
+    
+    let seller ={ name, serviceName, price, photo};
+
+    let categoryDoc= await serviceProviders.findOne({name: category});
+    if(!categoryDoc){
+        categoryDoc= new serviceProviders(
+            {
+                name: category,
+                nestedItems: []
+            }
+        );
+        categoryDoc.save();
+    }
+
+    categoryDoc.nestedItems.push(seller);
+    await categoryDoc.save();
     res.redirect("/qixer/home");
 });
-// app.post('/qixer/services', async (req, res) => {
-//     let page= req.body.buttonId;    
-//     res.redirect(`/qixer/services?page=${page}`);
-// });
