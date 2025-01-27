@@ -10,7 +10,7 @@
 // https://www.mongodb.com/docs/mongodb-vscode/playgrounds/
 
 // Select the database to use.
-use('On_Demand_Service_Website');
+// use('On_Demand_Service_Website');
 
 // Insert a few documents into the sales collection.
 // db.getCollection('Service_Providers').insertMany([
@@ -52,5 +52,13 @@ use('On_Demand_Service_Website');
 //     }
 // ]);
 
-db.getCollection("Service_Providers").deleteMany({price:500});
+// db.getCollection("Service_Providers").deleteMany({price:500});
 
+use('Cluster0');
+
+// db.getCollection('Popular_Services').insertOne({
+//     name: "Dhruv Agrawal",
+//     serviceName: "All Saloon Services",
+//     price: 100,
+//     photo: "https://images.unsplash.com/photo-1592009309602-1dde752490ae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+// });

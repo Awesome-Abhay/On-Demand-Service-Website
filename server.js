@@ -4,8 +4,10 @@ const path= require("path");
 const port= 3000;
 const mongoose= require("mongoose");
 let serviceProviders= require("./models/serviceProviders.js");
+let popularServices= require("./models/popularServices.js");
 require('dotenv').config();
 
+app.use(express.json());
 
 main().catch(err => console.log(err));
 
@@ -14,11 +16,17 @@ async function main() {
     console.log("Connected to MongoDB");
 }
 
+let allPopularServices;
 let allServiceProviders;
 async function getServiceProvider() {
     allServiceProviders = await serviceProviders.find({});
 }
 getServiceProvider();
+
+async function getPopularServices() {
+    allPopularServices = await popularServices.find({});
+}
+getPopularServices();
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
@@ -37,14 +45,21 @@ app.get('/qixer', (req, res) => {
     res.render("auth");
 });
 app.get('/qixer/home', (req, res) => {
-    getServiceProvider();
-    res.render("index", { serviceProviders: allServiceProviders });
+    getPopularServices();
+    // getServiceProvider();
+    res.render("index", { serviceProviders: allPopularServices });
 });
 app.get('/qixer/about', (req, res) => {
     res.render("about");
 });
-app.get(`/qixer/services`, (req, res) => {
-    res.render("services");
+app.get(`/qixer/services`, async(req, res) => {
+    await getServiceProvider();
+
+    console.log("this is request:" ,req.query.page);
+          
+    const page = parseInt(req.query.page) || 1;
+    // const page=2;
+    res.render('services', { serviceProviders: allServiceProviders, page });
 });
 app.get('/qixer/all_categories', (req, res) => {
     res.render("categories");
@@ -65,3 +80,7 @@ app.post('/qixer/seller', async (req, res) => {
     await seller.save();
     res.redirect("/qixer/home");
 });
+// app.post('/qixer/services', async (req, res) => {
+//     let page= req.body.buttonId;    
+//     res.redirect(`/qixer/services?page=${page}`);
+// });

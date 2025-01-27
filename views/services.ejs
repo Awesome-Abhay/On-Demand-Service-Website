@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,83 +13,112 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <script src="/update.js" defer type="module"></script>
 </head>
+
 <body>
 
     <%- include('includes/dialog.ejs') %>
 
-    <%- include("includes/nav.ejs") %>
-    
-    <div class="aboutOuter flex align-center">
-        <div class="aboutInner">
-            <div>Home | Service List</div>
-            <div>Our Best Services List</div>
-        </div>
-    </div>
+        <%- include("includes/nav.ejs") %>
 
-    <div class="choosing">
-        <div>
-            <select>
-                <option value="" disabled selected>Select a Category</option>
-                <option value="Category1">Category 1</option>
-                <option value="Category2">Category 2</option>
-                <option value="Category3">Category 3</option>
-                <option value="Category4">Category 4</option>
-            </select>
-        </div>
-        <div>
-            <select>
-                <option value="" disabled selected>Price Range</option>
-                <option value="Price Range">Price Range</option>
-                <option value="Price Range">Price Range</option>
-                <option value="Price Range">Price Range</option>
-                <option value="Price Range">Price Range</option>
-            </select>
-        </div>
-        <div>
-            <select>
-                <option value="" disabled selected>Ratings</option>
-                <option value="Ratings">Ratings</option>
-                <option value="Ratings">Ratings</option>
-                <option value="Ratings">Ratings</option>
-                <option value="Ratings">Ratings</option>
-            </select>
-        </div>
-        <div>
-            <label style="color: #5b5757;" for="Sorting">Sort By:</label>
-            <select id="Sorting">
-                <option value="" disabled selected>Sort by</option>
-                <option value="Category1">$0 to $20</option>
-                <option value="Category2">$20 to $40</option>
-                <option value="Category3">$40 to $60</option>
-                <option value="Category4">$60 to $80</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="resultCount">
-        <div class="wrapper">
-            <div>1,283 Search Result "Cleaning Service"</div>
-            <div>Showing 12 of 48</div>
-        </div>
-    </div>
-
-    <section class="featured">
-        <div class="carousel">
-            <div class="wrapper">
-                <%- include("includes/servicesList.ejs") %>
-                <%- include("includes/servicesList.ejs") %>
-                <%- include("includes/servicesList.ejs") %>
-                <%- include("includes/servicesList.ejs") %>
+            <div class="aboutOuter flex align-center">
+                <div class="aboutInner">
+                    <div>Home | Service List</div>
+                    <div>Our Best Services List</div>
+                </div>
             </div>
-        </div>
-        <div class="circles container">
-            <button></button><button></button><button></button><button></button>
-        </div>
-    </section>
 
-    <section class="futter">
-        <%- include("includes/footer.ejs") %>
-    </section>
+            <div class="choosing">
+                <div>
+                    <select>
+                        <option value="" disabled selected>Select a Category</option>
+                        <option value="Category1">Category 1</option>
+                        <option value="Category2">Category 2</option>
+                        <option value="Category3">Category 3</option>
+                        <option value="Category4">Category 4</option>
+                    </select>
+                </div>
+                <div>
+                    <select>
+                        <option value="" disabled selected>Price Range</option>
+                        <option value="Price Range">Price Range</option>
+                        <option value="Price Range">Price Range</option>
+                        <option value="Price Range">Price Range</option>
+                        <option value="Price Range">Price Range</option>
+                    </select>
+                </div>
+                <div>
+                    <select>
+                        <option value="" disabled selected>Ratings</option>
+                        <option value="Ratings">Ratings</option>
+                        <option value="Ratings">Ratings</option>
+                        <option value="Ratings">Ratings</option>
+                        <option value="Ratings">Ratings</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="color: #5b5757;" for="Sorting">Sort By:</label>
+                    <select id="Sorting">
+                        <option value="" disabled selected>Sort by</option>
+                        <option value="Category1">$0 to $20</option>
+                        <option value="Category2">$20 to $40</option>
+                        <option value="Category3">$40 to $60</option>
+                        <option value="Category4">$60 to $80</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="resultCount">
+                <div class="wrapper">
+                    <div>1,283 Search Result "Cleaning Service"</div>
+                    <div>Showing 12 of 48</div>
+                </div>
+            </div>
+
+            <section class="featured">
+                <div class="carousel">
+                    <div class="wrapper">
+                        <% console.log(page);
+                         %>
+                        <h1 style="color: black;"><%= page %></h1>
+
+                        <% if (page==1) { %>
+                         <%- include('includes/servicePage1') %>
+                        <% } else { %>
+                            <%- include(`includes/servicePage2`) %>
+                        <% } %>
+
+                                
+                    </div>
+                </div>
+                <div class="circles container">
+                    <button id="1"></button>
+                    <button id="2"></button>
+                </div>
+            </section>
+
+            <section class="futter">
+                <%- include("includes/footer.ejs") %>
+            </section>
+
+
+            <script>
+                const buttons = document.querySelectorAll("button");
+                buttons.forEach(button => {
+                    button.addEventListener('click', async (event) => {
+                        const id = event.target.id;
+
+                        const response = await fetch(`/qixer/services?page=${id}`, {
+                            method: 'GET',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            }
+                        });
+                        
+
+                    });
+                });
+            </script>
 
 </body>
+
 </html>
