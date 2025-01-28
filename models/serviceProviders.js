@@ -6,7 +6,8 @@ const sellersSchema = new mongoose.Schema({
         name: String,
         serviceName: String, 
         price: String,
-        photo: String
+        photo: String,
+        category: String
         }
     ]
 },{ collection: 'Service_Providers' });

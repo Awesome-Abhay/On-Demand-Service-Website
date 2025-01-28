@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <script src="/update.js" defer type="module"></script>
     <style>
-        .active{
+        .active {
             background-color: lightgreen;
         }
     </style>
@@ -34,12 +34,13 @@
 
             <div class="choosing">
                 <div>
-                    <select>
-                        <option value="" disabled selected>Select a Category</option>
-                        <option value="Category1">Category 1</option>
-                        <option value="Category2">Category 2</option>
-                        <option value="Category3">Category 3</option>
-                        <option value="Category4">Category 4</option>
+                    <select onchange="filterByCategory(this.value)">
+                        <option value="all">Select a Category</option>
+                        <option value="saloonSpa">Saloon & Spa</option>
+                        <option value="cleaning">Cleaning</option>
+                        <option value="electric">Electric</option>
+                        <option value="homeMove">Home Move</option>
+                        <option value="painting">Painting</option>
                     </select>
                 </div>
                 <div>
@@ -86,10 +87,6 @@
                 <div class="carousel">
                     <div class="wrapper">
 
-                            
-                           
-
-
                         <% for(let seller of serviceProviders) { %>
                             <div class="card">
                                 <div class="image">
@@ -126,7 +123,7 @@
                         <button class="<%= currentPage === i ? 'active' : '' %>"
                             onclick="window.location.href='/qixer/services?page=<%= i %>'">
                         </button>
-                    <% } %>
+                        <% } %>
                 </div>
             </section>
 
@@ -139,7 +136,7 @@
             <script>
                 // Update active button state
 
-                let buttons= document.querySelectorAll('circles button');
+                let buttons = document.querySelectorAll('circles button');
 
                 buttons.forEach(button => {
                     button.addEventListener('click', function () {
@@ -147,6 +144,27 @@
                             btn.classList.remove('active'));
                         this.classList.add('active');
                     });
+                });
+
+
+                // filter by Category
+
+                // Replace the existing filterByCategory function with:
+                function filterByCategory(category) {
+                    if (category) {
+                        console.log(category);
+                        window.location.href = `/qixer/services?category=${category}`;
+                    }
+                }
+
+
+                // Display selected value after document loaded.
+                document.addEventListener('DOMContentLoaded', () => {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const category = urlParams.get('category');
+                    if (category) {
+                        document.querySelector('select').value = category;
+                    }
                 });
 
             </script>

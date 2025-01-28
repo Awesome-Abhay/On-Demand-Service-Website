@@ -23,8 +23,7 @@ async function getServiceProvider() {
     temp.forEach((doc) => {
         doc.nestedItems.forEach((item) => { 
             allServiceProviders.push(item);
-            
-         });
+        });
     });
 }
 getServiceProvider();
@@ -65,30 +64,30 @@ app.get(`/qixer/services`, async(req, res) => {
     const limit = 12;
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
+    const category= req.query.category;
+    
+    
+    let filteredServices=allServiceProviders;
+    if(category){
+        if(category!='all') 
+        filteredServices= await allServiceProviders.filter((service) => service.category == category);
+    }
     
     // Get paginated results
-    const paginatedServices = allServiceProviders.slice(startIndex, endIndex);
-    const totalServices = allServiceProviders.length;
+    const paginatedServices = filteredServices.slice(startIndex, endIndex);
+    
+    const totalServices = filteredServices.length;
     const totalPages = Math.ceil(totalServices / limit);
 
     res.render('services', { 
         serviceProviders: paginatedServices,
         currentPage: page,
         totalPages: totalPages,
-        totalServices: totalServices
+        totalServices: totalServices,
+        selectedCategory: category
+        
     });
 });
-
-
-// app.get(`/qixer/services`, async(req, res) => {
-//     await getServiceProvider();
-
-//     console.log("this is request:" ,req.query.page);
-          
-//     const page = parseInt(req.query.page) || 1;
-//     // const page=2;
-//     res.render('services', { serviceProviders: allServiceProviders, page });
-// });
 
 app.get('/qixer/all_categories', (req, res) => {
     res.render("categories");
@@ -106,7 +105,8 @@ app.get('/qixer/seller', (req, res) => {
 app.post('/qixer/seller', async (req, res) => {
     let { name, serviceName, price, photo, category } = req.body;
     
-    let seller ={ name, serviceName, price, photo};
+    
+    let seller ={ name, serviceName, price, photo, category};
 
     let categoryDoc= await serviceProviders.findOne({name: category});
     if(!categoryDoc){
