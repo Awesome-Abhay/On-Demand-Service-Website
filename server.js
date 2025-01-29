@@ -26,7 +26,7 @@ async function getServiceProvider() {
         });
     });
 }
-getServiceProvider();
+// getServiceProvider();
 
 async function getPopularServices() {
     allPopularServices = await popularServices.find({});
@@ -59,19 +59,38 @@ app.get('/qixer/about', (req, res) => {
 
 app.get(`/qixer/services`, async(req, res) => {
     
+    allServiceProviders=[];
+    await getServiceProvider();
     // Pagination logic
     const page = parseInt(req.query.page) || 1;
     const limit = 12;
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
     const category= req.query.category;
+    const price= req.query.price;
+
+    console.log("price:- "+price, "category:- "+category);
     
     
     let filteredServices=allServiceProviders;
-    if(category){
-        if(category!='all') 
-        filteredServices= await allServiceProviders.filter((service) => service.category == category);
+    console.log(filteredServices.length);
+    
+    console.log(".................................................................");
+    
+    if(category && price){
+        filteredServices= await allServiceProviders.filter((service)=>{
+            return (service.category === category && parseInt(service.price) <= price);
+        });
     }
+    console.log(filteredServices);
+    
+
+    // if(price){
+    //     filteredServices= await filteredServices.filter((service) => service.price <= price);
+    // }
+    // console.log(".................................................................");
+    
+    // console.log(filteredServices);
     
     // Get paginated results
     const paginatedServices = filteredServices.slice(startIndex, endIndex);
