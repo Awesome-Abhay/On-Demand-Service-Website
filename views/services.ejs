@@ -17,18 +17,18 @@
             background-color: lightgreen;
         }
 
-        .range-container{
+        .range-container {
             border: 1px solid #ddd;
             padding-top: 20px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            gap:5px;
+            gap: 5px;
         }
 
         .range-container label {
             display: block;
-            margin-bottom: 10px;
+            /* margin-bottom: 10px; */
             color: #5b5757;
         }
 
@@ -57,7 +57,8 @@
             color: #5b5757;
             font-size: 14px;
         }
-        .submit{
+
+        .submit {
             background-color: #1DBF73;
             width: 50%;
             height: 100%;
@@ -65,6 +66,30 @@
             border-radius: 10px;
             font-weight: 500;
         }
+
+        #rangeValue {
+            padding-left: 10px;
+            color: black;
+            width: 40%;
+            height: 70%;
+            border: none;
+            padding: 0px;
+        }
+
+        #rangeValue::-webkit-outer-spin-button,
+        #rangeValue::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+
+        #rangeValue:focus {
+            outline: none;
+        }
+
+        .range-container div:first-child {
+            display: flex;
+            align-items: center;
+        }
+
     </style>
 </head>
 
@@ -93,10 +118,12 @@
                     </select>
                 </div>
                 <div class="range-container">
-                    <label style="color: black;" for="priceRange">Price Range: ₹<span id="rangeValue"
-                            style="color: black;">0</span></label>
+                    <div>
+                        <label style="color: black;" for="rangeValue">Price Range: ₹</label>
+                        <input step="100" type="number" name="" id="rangeValue" value="5000" onchange="updateRangeValue(this.value)"></input>
+                    </div>
 
-                    <input type="range" id="priceRange" min="0" max="5000" step="100" value="0"
+                    <input type="range" id="priceRange" min="0" max="5000" step="100" value="5000"
                         oninput="updateRangeValue(this.value)">
 
                     <div class="range-labels">
@@ -214,7 +241,7 @@
 
                 // Replace the existing filterByCategory function with:
                 function filterByCategory(cat) {
-                    category=cat;
+                    category = cat;
                 }
 
 
@@ -222,27 +249,28 @@
                 document.addEventListener('DOMContentLoaded', () => {
                     const urlParams = new URLSearchParams(window.location.search);
                     const category = urlParams.get('category');
-                    const price= urlParams.get('price');
+                    const price = urlParams.get('price');
                     if (category) {
                         document.querySelector('select').value = category;
                     }
-                    if(price){
-                        document.getElementById('rangeValue').textContent = price;
+                    if (price) {
+                        document.getElementById('rangeValue').value = price;
                         document.getElementById('priceRange').value = price;
                     }
                 });
 
 
                 // Update range value
-                function updateRangeValue(value) {
-                    document.getElementById('rangeValue').textContent = value;
-                    price=value;
+                function updateRangeValue(val) {
+                    document.getElementById('rangeValue').value = val;
+                    price = val;
+                    document.getElementById('priceRange').value = val;
                     // window.location.href = `/qixer/services?price=${value}`;
                 }
 
-                document.querySelector(".submit").addEventListener("click",()=>{
+                document.querySelector(".submit").addEventListener("click", () => {
                     category = document.querySelector('select').value;
-                    price= document.getElementById('rangeValue').textContent;
+                    price = document.getElementById('rangeValue').value;
                     window.location.href = `/qixer/services?category=${category}&price=${price}`;
                 })
 

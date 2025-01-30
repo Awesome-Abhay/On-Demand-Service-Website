@@ -68,21 +68,23 @@ app.get(`/qixer/services`, async(req, res) => {
     const endIndex = page * limit;
     const category= req.query.category;
     const price= req.query.price;
-
-    console.log("price:- "+price, "category:- "+category);
     
     
     let filteredServices=allServiceProviders;
-    console.log(filteredServices.length);
-    
-    console.log(".................................................................");
-    
+        
     if(category && price){
-        filteredServices= await allServiceProviders.filter((service)=>{
-            return (service.category === category && parseInt(service.price) <= price);
-        });
+        if(category=='all'){
+            filteredServices= await allServiceProviders.filter((service)=>{
+                return (parseInt(service.price) <= price);
+            });
+        }else{
+
+            filteredServices= await allServiceProviders.filter((service)=>{
+                return (service.category === category && parseInt(service.price) <= price);
+            });
+        }
+
     }
-    console.log(filteredServices);
     
 
     // if(price){
