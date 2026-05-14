@@ -9,13 +9,6 @@ require('dotenv').config();
 
 app.use(express.json());
 
-main().catch(err => console.log(err));
-
-async function main() {
-    await mongoose.connect(process.env.Mongoose);
-    console.log("Connected to MongoDB");
-}
-
 let allPopularServices;
 let allServiceProviders=[];
 async function getServiceProvider() {
@@ -31,7 +24,6 @@ async function getServiceProvider() {
 async function getPopularServices() {
     allPopularServices = await popularServices.find({});
 }
-getPopularServices();
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
@@ -39,18 +31,14 @@ app.set("views", path.join(__dirname, "/views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 
-app.listen(port, () => {
-    console.log(`Server is listening on port: ${port}`);
-});
-
 app.get('/', (req, res)=>{
     res.redirect("/qixer");
 })
 app.get('/qixer', (req, res) => {
     res.render("auth");
 });
-app.get('/qixer/home', (req, res) => {
-    getPopularServices();
+app.get('/qixer/home', async (req, res) => {
+    await getPopularServices();
     res.render("index", { serviceProviders: allPopularServices });
 });
 app.get('/qixer/about', (req, res) => {
@@ -143,4 +131,24 @@ app.post('/qixer/seller', async (req, res) => {
     categoryDoc.nestedItems.push(seller);
     await categoryDoc.save();
     res.redirect("/qixer/home");
+});
+
+async function startServer() {
+    if (!process.env.Mongoose) {
+        throw new Error("Missing Mongoose environment variable");
+    }
+
+    await mongoose.connect(process.env.Mongoose);
+    console.log("Connected to MongoDB");
+
+    await getPopularServices();
+
+    app.listen(port, () => {
+        console.log(`Server is listening on port: ${port}`);
+    });
+}
+
+startServer().catch((err) => {
+    console.error(err);
+    process.exit(1);
 });
